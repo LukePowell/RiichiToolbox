@@ -21,155 +21,93 @@ package com.dragonwellstudios.riichitoolbox.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.dragonwellstudios.riichitoolbox.android.ui.theme.Riichi_ToolboxTheme
-import com.dragonwellstudios.riichitoolbox.logic.HandResult
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.dragonwellstudios.riichitoolbox.android.ui.views.ScoreCalculatorView
+
+
+sealed class Screen(val route: String, @StringRes val labelId: Int, @DrawableRes val iconId: Int) {
+    object ScoreCalc :
+        Screen("score_calc", R.string.score_calc, R.drawable.ic_baseline_calculate_24)
+
+    object FindHand : Screen("find_hand", R.string.find_hand, R.drawable.cards_outline)
+    object RecordGame :
+        Screen("record_game", R.string.record_game, R.drawable.ic_baseline_videogame_asset_24)
+}
 
 class MainActivityCompose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Riichi_ToolboxTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    ScoreCalculatorView()
+            val navController = rememberNavController()
+
+            val items = listOf(
+                Screen.ScoreCalc,
+                Screen.FindHand,
+                Screen.RecordGame
+            )
+
+            Scaffold(
+                bottomBar = {
+                    BottomNavigation {
+                        val navBackStackEntry by navController.currentBackStackEntryAsState()
+                        val currentDestination = navBackStackEntry?.destination
+                        items.forEach { screen ->
+                            BottomNavigationItem(
+                                icon = {
+                                    Icon(
+                                        painterResource(id = screen.iconId),
+                                        contentDescription = null
+                                    )
+                                },
+                                label = { Text(stringResource(screen.labelId)) },
+                                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                                onClick = {
+                                    navController.navigate(screen.route) {
+                                        // Pop up to the start destination of the graph to
+                                        // avoid building up a large stack of destinations
+                                        // on the back stack as users select items
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        // Avoid multiple copies of the same destination when
+                                        // reselecting the same item
+                                        launchSingleTop = true
+                                        // Restore state when reselecting a previously selected item
+                                        restoreState = true
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+            ) { innerPadding ->
+                NavHost(
+                    navController,
+                    startDestination = Screen.ScoreCalc.route,
+                    Modifier.padding(innerPadding)
+                ) {
+                    composable(Screen.ScoreCalc.route) { ScoreCalculatorView() }
+                    composable(Screen.FindHand.route) { Text("404: Cannot Find Hands") }
+                    composable(Screen.RecordGame.route) { Text("404: Cannot Record Games") }
                 }
             }
         }
     }
 }
 
-class ScoreViewModel : ViewModel() {
-    private val _score = MutableLiveData(HandResult(1, 30))
-    val handResult: LiveData<HandResult> = _score
-
-    private val _han = MutableLiveData(1)
-    val han: LiveData<Int> = _han
-
-    private val _fu = MutableLiveData(20)
-    val fu: LiveData<Int> = _fu
-
-    private val _kiriageMangan = MutableLiveData(true)
-    val kiriageMangan: LiveData<Boolean> = _kiriageMangan
-
-    private val _dealer = MutableLiveData(false)
-    val dealer: LiveData<Boolean> = _dealer
-
-    fun onFuChanged(newFu: Int) {
-        _fu.value = newFu
-        recalculateScore()
-    }
-
-    fun onHanChanged(newHan: Int) {
-        _han.value = newHan
-        recalculateScore()
-    }
-
-    fun onKiriageManganChanged(newKiriageMangan: Boolean) {
-        _kiriageMangan.value = newKiriageMangan
-        recalculateScore()
-    }
-
-    fun onDealerChanged(newDealer: Boolean) {
-        _dealer.value = newDealer
-        recalculateScore()
-    }
-
-    private fun recalculateScore() {
-        _score.value = HandResult(
-            _han.value ?: 1,
-            _fu.value ?: 30,
-            _kiriageMangan.value!!
-        )
-    }
-}
-
-@Composable
-fun ScoreCalculatorView(scoreViewModel: ScoreViewModel = viewModel()) {
-    val han: Int by scoreViewModel.han.observeAsState(1)
-    val fu: Int by scoreViewModel.fu.observeAsState(20)
-    val handResult: HandResult by scoreViewModel.handResult.observeAsState(HandResult(0, 0))
-    val dealer: Boolean by scoreViewModel.dealer.observeAsState(false)
-    val kiriageMangan: Boolean by scoreViewModel.kiriageMangan.observeAsState(true)
-
-    var hanText by remember {
-        mutableStateOf("$han")
-    }
-    var fuText by remember {
-        mutableStateOf("$fu")
-    }
-
-
-    Column {
-        OutlinedTextField(
-            value = hanText,
-            onValueChange = {
-                hanText = it
-                if (hanText.isNotEmpty()) {
-                    scoreViewModel.onHanChanged(hanText.toInt())
-                }
-            },
-            label = { Text("Han") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true
-        )
-        OutlinedTextField(
-            value = fuText,
-            onValueChange = {
-                fuText = it
-                if (fuText.isNotEmpty()) {
-                    scoreViewModel.onFuChanged(fuText.toInt())
-                }
-            },
-            label = { Text("Fu") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true
-        )
-        Row {
-            Text(text = "Kiriage Mangan")
-            Switch(
-                checked = kiriageMangan,
-                onCheckedChange = { scoreViewModel.onKiriageManganChanged(it) }
-            )
-        }
-        Row {
-            Text(text = "Dealer")
-            Switch(
-                checked = dealer,
-                onCheckedChange = { scoreViewModel.onDealerChanged(it) }
-            )
-        }
-        if (dealer) {
-            Text("${handResult.getPayoutToDealerTsumo()}")
-            Text("${handResult.getPayoutToDealerRon()}")
-        } else {
-            val payout = handResult.getPayoutToNonDealerTsumo()
-            Text("${payout.nonDealer}/${payout.dealer}")
-            Text("${handResult.getPayoutToNonDealerRon()}")
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    Riichi_ToolboxTheme {
-        ScoreCalculatorView()
-    }
-}
