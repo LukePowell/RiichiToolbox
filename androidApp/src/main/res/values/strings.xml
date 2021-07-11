@@ -21,4 +21,12 @@
     <string name="score_calc">Score Calc</string>
     <string name="find_hand">Find Hand</string>
     <string name="record_game">Record Game</string>
+    <string name="kanji_east">東</string>
+    <string name="kanji_south">南</string>
+    <string name="kanji_west">西</string>
+    <string name="kanji_north">北</string>
+    <string name="localized_east">E</string>
+    <string name="localized_south">S</string>
+    <string name="localized_west">W</string>
+    <string name="localized_north">N</string>
 </resources>

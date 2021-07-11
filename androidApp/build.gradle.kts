@@ -35,6 +35,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.3.0-alpha06")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha04")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha08")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
 }
 

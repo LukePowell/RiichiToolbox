@@ -23,10 +23,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -37,6 +36,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.dragonwellstudios.riichitoolbox.android.ui.views.RecordGameView
 import com.dragonwellstudios.riichitoolbox.android.ui.views.ScoreCalculatorView
 
 
@@ -100,14 +100,15 @@ class MainActivityCompose : ComponentActivity() {
                 NavHost(
                     navController,
                     startDestination = Screen.ScoreCalc.route,
-                    Modifier.padding(innerPadding)
+                    Modifier
+                        .padding(innerPadding)
+                        .fillMaxSize()
                 ) {
                     composable(Screen.ScoreCalc.route) { ScoreCalculatorView() }
                     composable(Screen.FindHand.route) { Text("404: Cannot Find Hands") }
-                    composable(Screen.RecordGame.route) { Text("404: Cannot Record Games") }
+                    composable(Screen.RecordGame.route) { RecordGameView() }
                 }
             }
         }
     }
 }
-
