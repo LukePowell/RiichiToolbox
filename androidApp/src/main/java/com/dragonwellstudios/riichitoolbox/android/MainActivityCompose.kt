@@ -22,13 +22,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,8 +34,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dragonwellstudios.riichitoolbox.android.ui.theme.Riichi_ToolboxTheme
-import com.dragonwellstudios.riichitoolbox.logic.Score
-import com.dragonwellstudios.riichitoolbox.logic.ScoreCalculator
+import com.dragonwellstudios.riichitoolbox.logic.HandResult
 
 class MainActivityCompose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,16 +52,16 @@ class MainActivityCompose : ComponentActivity() {
 }
 
 class ScoreViewModel : ViewModel() {
-    private val _score = MutableLiveData(ScoreCalculator.calculate(1, 30))
-    val score: LiveData<Score> = _score
+    private val _score = MutableLiveData(HandResult(1, 30))
+    val handResult: LiveData<HandResult> = _score
 
     private val _han = MutableLiveData(1)
     val han: LiveData<Int> = _han
 
-    private val _fu = MutableLiveData(1)
+    private val _fu = MutableLiveData(20)
     val fu: LiveData<Int> = _fu
 
-    private val _kiriageMangan = MutableLiveData(false)
+    private val _kiriageMangan = MutableLiveData(true)
     val kiriageMangan: LiveData<Boolean> = _kiriageMangan
 
     private val _dealer = MutableLiveData(false)
@@ -92,10 +88,10 @@ class ScoreViewModel : ViewModel() {
     }
 
     private fun recalculateScore() {
-        _score.value = ScoreCalculator.calculate(
+        _score.value = HandResult(
             _han.value ?: 1,
             _fu.value ?: 30,
-            _kiriageMangan.value ?: false
+            _kiriageMangan.value!!
         )
     }
 }
@@ -103,33 +99,70 @@ class ScoreViewModel : ViewModel() {
 @Composable
 fun ScoreCalculatorView(scoreViewModel: ScoreViewModel = viewModel()) {
     val han: Int by scoreViewModel.han.observeAsState(1)
-    val fu: Int by scoreViewModel.fu.observeAsState(1)
-    val score: Score by scoreViewModel.score.observeAsState(ScoreCalculator.calculate(1, 1))
+    val fu: Int by scoreViewModel.fu.observeAsState(20)
+    val handResult: HandResult by scoreViewModel.handResult.observeAsState(HandResult(0, 0))
+    val dealer: Boolean by scoreViewModel.dealer.observeAsState(false)
+    val kiriageMangan: Boolean by scoreViewModel.kiriageMangan.observeAsState(true)
+
+    var hanText by remember {
+        mutableStateOf("$han")
+    }
+    var fuText by remember {
+        mutableStateOf("$fu")
+    }
+
 
     Column {
         OutlinedTextField(
-            value = "$han",
+            value = hanText,
             onValueChange = {
-                if (it.isEmpty()) {
-                    scoreViewModel.onHanChanged(1)
-                } else {
-                    scoreViewModel.onHanChanged(it.toInt())
+                hanText = it
+                if (hanText.isNotEmpty()) {
+                    scoreViewModel.onHanChanged(hanText.toInt())
                 }
             },
             label = { Text("Han") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
-            )
+            ),
+            singleLine = true
         )
         OutlinedTextField(
-            value = "$fu",
-            onValueChange = { scoreViewModel.onFuChanged(it.toInt()) },
+            value = fuText,
+            onValueChange = {
+                fuText = it
+                if (fuText.isNotEmpty()) {
+                    scoreViewModel.onFuChanged(fuText.toInt())
+                }
+            },
             label = { Text("Fu") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
-            )
+            ),
+            singleLine = true
         )
-        Text(text = "${score.getPayoutToDealerTsumo()}\n${score.getPayoutToDealerRon()}\n\n${score.getPayoutToNonDealerTsumo().dealer}/${score.getPayoutToNonDealerTsumo().nonDealer}\n${score.getPayoutToNonDealerRon()}")
+        Row {
+            Text(text = "Kiriage Mangan")
+            Switch(
+                checked = kiriageMangan,
+                onCheckedChange = { scoreViewModel.onKiriageManganChanged(it) }
+            )
+        }
+        Row {
+            Text(text = "Dealer")
+            Switch(
+                checked = dealer,
+                onCheckedChange = { scoreViewModel.onDealerChanged(it) }
+            )
+        }
+        if (dealer) {
+            Text("${handResult.getPayoutToDealerTsumo()}")
+            Text("${handResult.getPayoutToDealerRon()}")
+        } else {
+            val payout = handResult.getPayoutToNonDealerTsumo()
+            Text("${payout.nonDealer}/${payout.dealer}")
+            Text("${handResult.getPayoutToNonDealerRon()}")
+        }
     }
 }
 

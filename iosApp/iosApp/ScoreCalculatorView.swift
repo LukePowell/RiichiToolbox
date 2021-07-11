@@ -7,8 +7,8 @@ struct ScoreCalculatorView: View {
     @State private var kiriageMangan = true
     @State private var dealer = false
     
-    var score: Score {
-        ScoreCalculator.Companion().calculate(han: han, fu: fu, kiriageMangan: kiriageMangan)
+    var score: HandResult {
+        HandResult(han: han, fu: fu, kiriageMangan: kiriageMangan)
     }
     
     var body: some View {

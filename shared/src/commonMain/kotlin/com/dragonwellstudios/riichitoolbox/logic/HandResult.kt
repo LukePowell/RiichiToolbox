@@ -21,7 +21,9 @@ import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.pow
 
-class Score(private val basePoints: Int) {
+class HandResult(han: Int, fu: Int, kiriageMangan: Boolean = false) {
+    private val basePoints: Int = calculateBasePoints(han, fu, kiriageMangan)
+
     data class Payout(val dealer: Int, val nonDealer: Int)
 
     /**
@@ -51,41 +53,46 @@ class Score(private val basePoints: Int) {
      * @param value value to round to nearest 100
      */
     private fun roundToNearest100(value: Int) = ceil(value.toDouble() / 100.0f).toInt() * 100
-}
 
-class ScoreCalculator {
+    /**
+     * Calculate base points for a hand from han and fu
+     * @param han The amount of han in a hand should be a positive value >= 1
+     * @param fu The amount of fu in a hand should be a positive value 20-110
+     * @param kiriageMangan true if kirage mangan is allowed rounds 1920 base points to 2000
+     * @return The base points for the given han/fu and kiriage rule
+     */
+    private fun calculateBasePoints(han: Int, fu: Int, kiriageMangan: Boolean = false): Int {
+        //Round up for any fu besides chiitoitsu
+        var croppedFu = fu
+        if (fu != 25) {
+            croppedFu = ceil(fu.toFloat() / 10.0f).toInt() * 10
+        }
+
+        var basePoints: Int
+        when (han) {
+            1, 2, 3, 4 -> {
+                //Standard equation to calculate base points
+                basePoints = croppedFu * 2.0.pow((2 + han).toDouble()).toInt()
+                basePoints = min(basePoints, MANGAN_BASE_POINTS)
+            }
+            5 -> basePoints = MANGAN_BASE_POINTS
+            6, 7 -> basePoints = HANEMAN_BASE_POINTS
+            8, 9, 10 -> basePoints = BAIMAN_BASE_POINTS
+            11, 12 -> basePoints = SANBAIMAN_BASE_POINTS
+            else -> basePoints = YAKUMAN_BASE_POINTS
+        }
+
+        if (kiriageMangan && basePoints == 1920)
+            basePoints = 2000
+
+        return basePoints
+    }
+
     companion object {
         private const val MANGAN_BASE_POINTS = 2000
         private const val HANEMAN_BASE_POINTS = 3000
         private const val BAIMAN_BASE_POINTS = 4000
         private const val SANBAIMAN_BASE_POINTS = 6000
         private const val YAKUMAN_BASE_POINTS = 8000
-
-        fun calculate(han: Int, fu: Int, kiriageMangan: Boolean = false): Score {
-            //Round up for any fu besides chiitoitsu
-            var croppedFu = fu
-            if (fu != 25) {
-                croppedFu = ceil(fu.toFloat() / 10.0f).toInt() * 10
-            }
-
-            var basePoints: Int
-            when (han) {
-                1, 2, 3, 4 -> {
-                    //Standard equation to calculate base points
-                    basePoints = croppedFu * 2.0.pow((2 + han).toDouble()).toInt()
-                    basePoints = min(basePoints, MANGAN_BASE_POINTS)
-                }
-                5 -> basePoints = MANGAN_BASE_POINTS
-                6, 7 -> basePoints = HANEMAN_BASE_POINTS
-                8, 9, 10 -> basePoints = BAIMAN_BASE_POINTS
-                11, 12 -> basePoints = SANBAIMAN_BASE_POINTS
-                else -> basePoints = YAKUMAN_BASE_POINTS
-            }
-
-            if (kiriageMangan && basePoints == 1920)
-                basePoints = 2000
-
-            return Score(basePoints)
-        }
     }
 }

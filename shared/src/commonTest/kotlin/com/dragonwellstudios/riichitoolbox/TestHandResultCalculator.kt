@@ -18,18 +18,14 @@
 
 package com.dragonwellstudios.riichitoolbox
 
-import com.dragonwellstudios.riichitoolbox.logic.Score
-import com.dragonwellstudios.riichitoolbox.logic.ScoreCalculator
+import com.dragonwellstudios.riichitoolbox.logic.HandResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.fail
 
-data class TestCase(val han: Int, val fu: Int, val expected: Score)
-
-class TestScoreCalculator {
+class TestHandResultCalculator {
     @Test
     fun doesNotRoundUp() {
-        val score = ScoreCalculator.calculate(4, 25)
+        val score = HandResult(4, 25)
         assertEquals(9600, score.getPayoutToDealerRon())
         assertEquals(3200, score.getPayoutToDealerTsumo())
         assertEquals(6400, score.getPayoutToNonDealerRon())
@@ -39,7 +35,7 @@ class TestScoreCalculator {
 
     @Test
     fun doesRoundUp() {
-        val score = ScoreCalculator.calculate(4, 27)
+        val score = HandResult(4, 27)
         assertEquals(11600, score.getPayoutToDealerRon())
         assertEquals(3900, score.getPayoutToDealerTsumo())
         assertEquals(7700, score.getPayoutToNonDealerRon())
@@ -49,8 +45,8 @@ class TestScoreCalculator {
 
     @Test
     fun kiriageMangan() {
-        val _4han30fu = ScoreCalculator.calculate(4, 30, true)
-        val _3han60fu = ScoreCalculator.calculate(3, 60, true)
+        val _4han30fu = HandResult(4, 30, true)
+        val _3han60fu = HandResult(3, 60, true)
 
         assertEquals(12000, _4han30fu.getPayoutToDealerRon())
         assertEquals(12000, _3han60fu.getPayoutToDealerRon())
@@ -58,7 +54,7 @@ class TestScoreCalculator {
 
     @Test
     fun mangan() {
-        val score = ScoreCalculator.calculate(5, 0)
+        val score = HandResult(5, 0)
 
         assertEquals(12000, score.getPayoutToDealerRon())
         assertEquals(4000, score.getPayoutToDealerTsumo())
@@ -70,7 +66,7 @@ class TestScoreCalculator {
     @Test
     fun haneman() {
         for (han in 6..7) {
-            val score = ScoreCalculator.calculate(han, 0)
+            val score = HandResult(han, 0)
 
             assertEquals(18000, score.getPayoutToDealerRon())
             assertEquals(6000, score.getPayoutToDealerTsumo())
@@ -83,7 +79,7 @@ class TestScoreCalculator {
     @Test
     fun baimain() {
         for (han in 8..10) {
-            val score = ScoreCalculator.calculate(han, 0)
+            val score = HandResult(han, 0)
 
             assertEquals(24000, score.getPayoutToDealerRon())
             assertEquals(8000, score.getPayoutToDealerTsumo())
@@ -96,7 +92,7 @@ class TestScoreCalculator {
     @Test
     fun sanbaiman() {
         for (han in 11..12) {
-            val score = ScoreCalculator.calculate(han, 0)
+            val score = HandResult(han, 0)
 
             assertEquals(36000, score.getPayoutToDealerRon())
             assertEquals(12000, score.getPayoutToDealerTsumo())
@@ -108,7 +104,7 @@ class TestScoreCalculator {
 
     @Test
     fun yakuman() {
-        val score = ScoreCalculator.calculate(13, 0)
+        val score = HandResult(13, 0)
 
         assertEquals(48000, score.getPayoutToDealerRon())
         assertEquals(16000, score.getPayoutToDealerTsumo())
