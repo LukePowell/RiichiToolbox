@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dragonwellstudios.riichitoolbox.android.ui.views
+package com.dragonwellstudios.riichitoolbox.android.ui.views.score_calculator
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,61 +24,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dragonwellstudios.riichitoolbox.android.ui.theme.Riichi_ToolboxTheme
 import com.dragonwellstudios.riichitoolbox.logic.HandResult
-
-class ScoreViewModel : ViewModel() {
-    private val _score = MutableLiveData(HandResult(1, 20))
-    val handResult: LiveData<HandResult> = _score
-
-    private val _han = MutableLiveData(1)
-    val han: LiveData<Int> = _han
-
-    private val _fu = MutableLiveData(20)
-    val fu: LiveData<Int> = _fu
-
-    private val _kiriageMangan = MutableLiveData(true)
-    val kiriageMangan: LiveData<Boolean> = _kiriageMangan
-
-    private val _dealer = MutableLiveData(false)
-    val dealer: LiveData<Boolean> = _dealer
-
-    fun onFuChanged(newFu: Int) {
-        _fu.value = newFu
-        recalculateScore()
-    }
-
-    fun onHanChanged(newHan: Int) {
-        _han.value = newHan
-        recalculateScore()
-    }
-
-    fun onKiriageManganChanged(newKiriageMangan: Boolean) {
-        _kiriageMangan.value = newKiriageMangan
-        recalculateScore()
-    }
-
-    fun onDealerChanged(newDealer: Boolean) {
-        _dealer.value = newDealer
-        recalculateScore()
-    }
-
-    private fun recalculateScore() {
-        _score.value = HandResult(
-            _han.value ?: 1,
-            _fu.value ?: 30,
-            _kiriageMangan.value!!
-        )
-    }
-}
 
 @Composable
 fun ScoreCalculatorView(scoreViewModel: ScoreViewModel = viewModel()) {
