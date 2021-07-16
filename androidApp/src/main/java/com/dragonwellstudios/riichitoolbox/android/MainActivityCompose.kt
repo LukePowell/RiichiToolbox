@@ -36,9 +36,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.dragonwellstudios.riichitoolbox.android.ui.views.RecordGameView
-import com.dragonwellstudios.riichitoolbox.android.ui.views.ScoreCalculatorView
-
+import com.dragonwellstudios.riichitoolbox.android.ui.views.GameListView
+import com.dragonwellstudios.riichitoolbox.android.ui.views.score_calculator.ScoreCalculatorView
 
 sealed class Screen(val route: String, @StringRes val labelId: Int, @DrawableRes val iconId: Int) {
     object ScoreCalc :
