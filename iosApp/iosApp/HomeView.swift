@@ -7,27 +7,30 @@
 //
 
 import SwiftUI
+import shared
 
 struct HomeView: View {
     var body: some View {
-        TabView {
-            ScoreCalculatorView()
-                .tabItem {
-                    Image("calculate")
-                    Text("Score Calc")
-                }
-            Text("404: Cannot Find Hands")
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Find Hand")
-                }
-            Text("Record Tab")
-                .tabItem {
-                    Image(systemName: "gamecontroller.fill")
-                    Text("Record Game")
-                }
+        NavigationView {
+            TabView {
+                ScoreCalculatorView()
+                    .tabItem {
+                        Image("calculate")
+                        Text("Score Calc")
+                    }
+                Text("404: Cannot Find Hands")
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("Find Hand")
+                    }
+                RecordGameView(game: RecordGameModel())
+                    .tabItem {
+                        Image(systemName: "gamecontroller.fill")
+                        Text("Record Game")
+                    }
+            }
+            .font(.headline)
         }
-        .font(.headline)
     }
 }
 

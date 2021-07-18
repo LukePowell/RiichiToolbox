@@ -18,19 +18,32 @@
 
 package com.dragonwellstudios.riichitoolbox.logic
 
-enum class Wind(val kanji: String) {
-    EAST("東"),
-    SOUTH("南"),
-    WEST("西"),
-    NORTH("北")
+class Player(val name: String, val startingWind: Wind, var points: Int)
+
+data class GameSettings(val east: String, val south: String, val west: String, val north: String, val startingPoints: Int = 25_000, val targetPoints: Int = 30_000) {
+    fun name(wind: Wind): String = when(wind) {
+        Wind.EAST -> east
+        Wind.SOUTH -> south
+        Wind.WEST -> west
+        Wind.NORTH -> north
+    }
 }
 
-enum class Suit {
-    MANZU,
-    SOUZU,
-    PINFU,
-    KAZEHAI,
-    SAGENPAI
-}
+class Game(val startingPoints: Int = 25_000, val targetPoints: Int = 30_000) {
+    val wind = Wind.EAST
+    val riichi = 0
+    val honba = 0
+    val hand = 1
 
-data class Tile(val suit: Suit, val value: Int)
+    fun ron() {
+
+    }
+
+    fun tsumo() {
+
+    }
+
+    fun ryuukyoku() {
+
+    }
+}
