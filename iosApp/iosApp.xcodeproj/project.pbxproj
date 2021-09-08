@@ -8,18 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		54B74DCC204DE58A95BA3F3D /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501CC252EFDA2E2EBB916469 /* Pods_iosApp.framework */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		80B8E96D26E8882C0097FE04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E96826E8882C0097FE04 /* Images.xcassets */; };
+		80B8E96F26E8882C0097FE04 /* ScoreCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E96A26E8882C0097FE04 /* ScoreCalculatorView.swift */; };
+		80B8E97026E8882C0097FE04 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E96B26E8882C0097FE04 /* HomeView.swift */; };
+		80B8E97126E8882C0097FE04 /* outline_calculate_black_48pt.imageset in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E96C26E8882C0097FE04 /* outline_calculate_black_48pt.imageset */; };
+		80B8E97926E8892B0097FE04 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E97626E8892B0097FE04 /* PlayerView.swift */; };
+		80B8E97A26E8892B0097FE04 /* RecordGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E97726E8892B0097FE04 /* RecordGameView.swift */; };
+		80B8E97B26E8892B0097FE04 /* RoundDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E97826E8892B0097FE04 /* RoundDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		501CC252EFDA2E2EBB916469 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D76516AD5DF3A80507007F5 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C90AD9B67078A9D3DB849D42 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		80B8E96826E8882C0097FE04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		80B8E96A26E8882C0097FE04 /* ScoreCalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorView.swift; sourceTree = "<group>"; };
+		80B8E96B26E8882C0097FE04 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		80B8E96C26E8882C0097FE04 /* outline_calculate_black_48pt.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = outline_calculate_black_48pt.imageset; sourceTree = "<group>"; };
+		80B8E97626E8892B0097FE04 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = record_game/PlayerView.swift; sourceTree = "<group>"; };
+		80B8E97726E8892B0097FE04 /* RecordGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordGameView.swift; path = record_game/RecordGameView.swift; sourceTree = "<group>"; };
+		80B8E97826E8892B0097FE04 /* RoundDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDataView.swift; path = record_game/RoundDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,27 +35,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54B74DCC204DE58A95BA3F3D /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		546AF4654B2DBFD7FB08C64F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C90AD9B67078A9D3DB849D42 /* Pods-iosApp.debug.xcconfig */,
-				5D76516AD5DF3A80507007F5 /* Pods-iosApp.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		5C8417D6C2B2D1EF29D1F262 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				501CC252EFDA2E2EBB916469 /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -57,7 +53,6 @@
 			children = (
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
-				546AF4654B2DBFD7FB08C64F /* Pods */,
 				5C8417D6C2B2D1EF29D1F262 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +68,13 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF82242A565900829871 /* ContentView.swift */,
+				80B8E97626E8892B0097FE04 /* PlayerView.swift */,
+				80B8E97726E8892B0097FE04 /* RecordGameView.swift */,
+				80B8E97826E8892B0097FE04 /* RoundDataView.swift */,
+				80B8E96B26E8882C0097FE04 /* HomeView.swift */,
+				80B8E96826E8882C0097FE04 /* Images.xcassets */,
+				80B8E96C26E8882C0097FE04 /* outline_calculate_black_48pt.imageset */,
+				80B8E96A26E8882C0097FE04 /* ScoreCalculatorView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 			);
@@ -87,7 +88,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
-				B2D2CB0B04A2FDBF86A6C2B6 /* [CP] Check Pods Manifest.lock */,
+				80B8E96726E885930097FE04 /* Run Script */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				E28E61CDB23CE80FBB353127 /* Frameworks */,
@@ -139,13 +140,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80B8E96D26E8882C0097FE04 /* Images.xcassets in Resources */,
+				80B8E97126E8882C0097FE04 /* outline_calculate_black_48pt.imageset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B2D2CB0B04A2FDBF86A6C2B6 /* [CP] Check Pods Manifest.lock */ = {
+		80B8E96726E885930097FE04 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -153,19 +156,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iosApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -174,8 +173,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80B8E97026E8882C0097FE04 /* HomeView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				80B8E97A26E8892B0097FE04 /* RecordGameView.swift in Sources */,
+				80B8E96F26E8882C0097FE04 /* ScoreCalculatorView.swift in Sources */,
+				80B8E97926E8892B0097FE04 /* PlayerView.swift in Sources */,
+				80B8E97B26E8892B0097FE04 /* RoundDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,15 +303,20 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C90AD9B67078A9D3DB849D42 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					shared,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -319,15 +327,20 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D76516AD5DF3A80507007F5 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					shared,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
