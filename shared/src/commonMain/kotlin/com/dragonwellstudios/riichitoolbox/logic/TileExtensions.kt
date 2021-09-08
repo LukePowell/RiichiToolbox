@@ -6,7 +6,7 @@ fun MutableList<Tile>.countUniquePairs(): Int {
         Suit.SOUZU to Array(9) { 0 },
         Suit.PINZU to Array(9) { 0 },
         Suit.KAZEHAI to Array(4) { 0 },
-        Suit.SAGENPAI to Array(4) { 0 }
+        Suit.SANGENPAI to Array(4) { 0 }
     )
 
     for (tile in this) {

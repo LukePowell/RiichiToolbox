@@ -22,9 +22,9 @@ class TestTileExtensions {
             Tile(Suit.PINZU, 1),
             Tile(Suit.PINZU, 2),
             Tile(Suit.PINZU, 3),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
             Tile(Suit.KAZEHAI, 1),
             Tile(Suit.KAZEHAI, 2)
         )
@@ -40,10 +40,10 @@ class TestTileExtensions {
             Tile(Suit.SOUZU, 1),
             Tile(Suit.PINZU, 3),
             Tile(Suit.PINZU, 3),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 2),
-            Tile(Suit.SAGENPAI, 2),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 2),
+            Tile(Suit.SANGENPAI, 2),
             Tile(Suit.KAZEHAI, 3),
             Tile(Suit.KAZEHAI, 3)
         )
@@ -60,10 +60,10 @@ class TestTileExtensions {
             Tile(Suit.SOUZU, 1),
             Tile(Suit.PINZU, 3),
             Tile(Suit.PINZU, 3),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 1),
-            Tile(Suit.SAGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
+            Tile(Suit.SANGENPAI, 1),
             Tile(Suit.KAZEHAI, 3),
             Tile(Suit.KAZEHAI, 3)
         )

@@ -30,7 +30,7 @@ enum class Suit {
     SOUZU,
     PINZU,
     KAZEHAI,
-    SAGENPAI
+    SANGENPAI
 }
 
 data class Tile(val suit: Suit, val value: Int) : Comparable<Tile> {
