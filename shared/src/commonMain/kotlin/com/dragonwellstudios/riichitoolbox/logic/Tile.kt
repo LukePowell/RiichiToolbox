@@ -33,4 +33,12 @@ enum class Suit {
     SAGENPAI
 }
 
-data class Tile(val suit: Suit, val value: Int)
+data class Tile(val suit: Suit, val value: Int) : Comparable<Tile> {
+    override fun compareTo(other: Tile): Int {
+        if (suit != other.suit) {
+            return suit.compareTo(other.suit)
+        }
+
+        return value.compareTo(other.value)
+    }
+}
