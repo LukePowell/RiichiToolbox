@@ -24,27 +24,27 @@ plugins {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
+    implementation("androidx.compose.ui:ui-tooling:1.1.0-alpha03")
     implementation("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.activity:activity-compose:1.3.0-alpha06")
+    implementation("androidx.activity:activity-compose:1.4.0-alpha01")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha04")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha08")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha08")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(31)
     defaultConfig {
         applicationId = "com.dragonwellstudios.riichitoolbox.android"
         minSdkVersion(23)
-        targetSdkVersion(30)
+        targetSdkVersion(31)
         versionCode = 1
         versionName = "1.0"
         vectorDrawables {

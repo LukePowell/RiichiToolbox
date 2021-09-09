@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="manzu">
+        <item>@drawable/man1</item>
+        <item>@drawable/man2</item>
+        <item>@drawable/man3</item>
+        <item>@drawable/man4</item>
+        <item>@drawable/man5</item>
+        <item>@drawable/man6</item>
+        <item>@drawable/man7</item>
+        <item>@drawable/man8</item>
+        <item>@drawable/man9</item>
+    </array>
+
+    <array name="souzu">
+        <item>@drawable/sou1</item>
+        <item>@drawable/sou2</item>
+        <item>@drawable/sou3</item>
+        <item>@drawable/sou4</item>
+        <item>@drawable/sou5</item>
+        <item>@drawable/sou6</item>
+        <item>@drawable/sou7</item>
+        <item>@drawable/sou8</item>
+        <item>@drawable/sou9</item>
+    </array>
+
+    <array name="pinzu">
+        <item>@drawable/pin1</item>
+        <item>@drawable/pin2</item>
+        <item>@drawable/pin3</item>
+        <item>@drawable/pin4</item>
+        <item>@drawable/pin5</item>
+        <item>@drawable/pin6</item>
+        <item>@drawable/pin7</item>
+        <item>@drawable/pin8</item>
+        <item>@drawable/pin9</item>
+    </array>
+
+    <array name="kazehai">
+        <item>@drawable/ton</item>
+        <item>@drawable/pei</item>
+        <item>@drawable/shaa</item>
+        <item>@drawable/nan</item>
+    </array>
+
+    <array name="sangenpai">
+        <item>@drawable/haku</item>
+        <item>@drawable/hatsu</item>
+        <item>@drawable/chun</item>
+    </array>
+</resources>
