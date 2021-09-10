@@ -1,10 +1,8 @@
 package com.dragonwellstudios.riichitoolbox.android.ui.views.hand_finder
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,14 +12,14 @@ import com.dragonwellstudios.riichitoolbox.logic.Suit
 import com.dragonwellstudios.riichitoolbox.logic.Tile
 
 @Composable
-fun HandView(tiles: List<Tile>) {
+fun HandView(tiles: List<Tile>, tileSelected: (Tile) -> Unit) {
     Row(modifier = Modifier.fillMaxWidth()){
         tiles.forEach {
             val modifier = Modifier
                 .padding(2.dp)
                 .fillMaxWidth()
                 .weight(1f)
-            TileView(it, modifier = modifier)
+            TileView(it, modifier = modifier, tileSelected = tileSelected)
         }
     }
 }
@@ -45,6 +43,7 @@ fun HandViewPreview() {
             Tile(Suit.SANGENPAI, 3),
             Tile(Suit.KAZEHAI, 3),
             Tile(Suit.KAZEHAI, 3)
-        )
+        ),
+        tileSelected = {}
     )
 }

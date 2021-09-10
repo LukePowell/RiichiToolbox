@@ -2,11 +2,11 @@ package com.dragonwellstudios.riichitoolbox.android.ui.views.tile
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.integerArrayResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dragonwellstudios.riichitoolbox.android.R
@@ -14,7 +14,7 @@ import com.dragonwellstudios.riichitoolbox.logic.Suit
 import com.dragonwellstudios.riichitoolbox.logic.Tile
 
 @Composable
-fun TileView(tile: Tile, modifier: Modifier = Modifier) {
+fun TileView(tile: Tile, modifier: Modifier = Modifier, tileSelected: (Tile) -> Unit) {
     val resourceArray = when (tile.suit) {
         Suit.MANZU -> LocalContext.current.resources.obtainTypedArray(R.array.manzu)
         Suit.SOUZU -> LocalContext.current.resources.obtainTypedArray(R.array.souzu)
@@ -30,7 +30,10 @@ fun TileView(tile: Tile, modifier: Modifier = Modifier) {
         )
         Image(
             painter = painterResource(id = resourceArray.getResourceId(tile.index, 0)),
-            contentDescription = "${tile.index} of ${tile.suit}"
+            contentDescription = "${tile.index} of ${tile.suit}",
+            modifier = Modifier.clickable {
+                tileSelected(tile)
+            }
         )
     }
 
@@ -40,5 +43,5 @@ fun TileView(tile: Tile, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun TileViewPreview() {
-    TileView(tile = Tile(Suit.KAZEHAI, 3))
+    TileView(tile = Tile(Suit.KAZEHAI, 3), tileSelected = {})
 }
