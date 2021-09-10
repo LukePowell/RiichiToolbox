@@ -2,13 +2,13 @@ package com.dragonwellstudios.riichitoolbox.android.ui.views.hand_finder
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dragonwellstudios.riichitoolbox.logic.Suit
 import com.dragonwellstudios.riichitoolbox.logic.Tile
@@ -59,6 +59,8 @@ fun HandFinderView(viewModel: HandViewModel = viewModel()) {
         }
 
         HandView(tiles = tiles, tileSelected = viewModel::removeTile)
+
+        HandControl()
 
         Button(
             onClick = { /*TODO*/ },
