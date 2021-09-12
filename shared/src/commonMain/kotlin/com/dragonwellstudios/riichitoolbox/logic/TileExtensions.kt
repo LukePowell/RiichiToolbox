@@ -25,3 +25,7 @@ fun MutableList<Tile>.countUniquePairs(): Int {
 }
 
 fun MutableList<Tile>.isSevenPairs() : Boolean = this.countUniquePairs() == 7
+
+fun MutableList<Tile>.calculateShanten() : Int {
+    return 14 - this.size
+}

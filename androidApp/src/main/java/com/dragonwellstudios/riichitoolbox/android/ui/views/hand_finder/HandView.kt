@@ -1,6 +1,7 @@
 package com.dragonwellstudios.riichitoolbox.android.ui.views.hand_finder
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -12,14 +13,37 @@ import com.dragonwellstudios.riichitoolbox.logic.Suit
 import com.dragonwellstudios.riichitoolbox.logic.Tile
 
 @Composable
-fun HandView(tiles: List<Tile>, tileSelected: (Tile) -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth()){
+fun HandView(
+    modifier: Modifier = Modifier,
+    tiles: List<Tile>,
+    minimumTiles: Int = 0,
+    tileSelected: (Tile) -> Unit
+) {
+    Row(modifier = modifier.fillMaxWidth()) {
         tiles.forEach {
-            val modifier = Modifier
-                .padding(2.dp)
-                .fillMaxWidth()
-                .weight(1f)
-            TileView(it, modifier = modifier, tileSelected = tileSelected)
+            if(!it.blank) {
+                TileView(
+                    it,
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .weight(1f),
+                    tileSelected = tileSelected
+                )
+            } else {
+                Spacer(
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .weight(1f)
+                )
+            }
+        }
+
+        repeat(minimumTiles - tiles.size) {
+            Spacer(
+                modifier = Modifier
+                    .padding(2.dp)
+                    .weight(1f)
+            )
         }
     }
 }
@@ -28,6 +52,7 @@ fun HandView(tiles: List<Tile>, tileSelected: (Tile) -> Unit) {
 @Composable
 fun HandViewPreview() {
     HandView(
+        tiles =
         listOf(
             Tile(Suit.MANZU, 1),
             Tile(Suit.MANZU, 1),
@@ -46,4 +71,16 @@ fun HandViewPreview() {
         ),
         tileSelected = {}
     )
+}
+
+@Preview
+@Composable
+fun HandViewPreviewMinimum() {
+    HandView(
+        tiles =
+        listOf(
+            Tile(Suit.MANZU, 1),
+        ),
+        minimumTiles = 14
+    ) {}
 }

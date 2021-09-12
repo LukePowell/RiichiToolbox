@@ -25,12 +25,12 @@ enum class Wind(val kanji: String) {
     NORTH("北")
 }
 
-enum class Suit {
-    MANZU,
-    SOUZU,
-    PINZU,
-    KAZEHAI,
-    SANGENPAI
+enum class Suit(val count: Int) {
+    MANZU(9),
+    SOUZU(9),
+    PINZU(9),
+    KAZEHAI(4),
+    SANGENPAI(3)
 }
 
 data class Tile(val suit: Suit, val value: Int) : Comparable<Tile> {
@@ -43,4 +43,5 @@ data class Tile(val suit: Suit, val value: Int) : Comparable<Tile> {
     }
 
     val index get() = this.value - 1
+    val blank get() = this.value == -1
 }
