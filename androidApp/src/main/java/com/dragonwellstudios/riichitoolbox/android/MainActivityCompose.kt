@@ -37,6 +37,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.dragonwellstudios.riichitoolbox.android.ui.views.RecordGameView
+import com.dragonwellstudios.riichitoolbox.android.ui.views.hand_finder.HandFinderView
 import com.dragonwellstudios.riichitoolbox.android.ui.views.score_calculator.ScoreCalculatorView
 
 sealed class Screen(val route: String, @StringRes val labelId: Int, @DrawableRes val iconId: Int) {
@@ -104,7 +105,7 @@ class MainActivityCompose : ComponentActivity() {
                         .fillMaxSize()
                 ) {
                     composable(Screen.ScoreCalc.route) { ScoreCalculatorView() }
-                    composable(Screen.FindHand.route) { Text("404: Cannot Find Hands") }
+                    composable(Screen.FindHand.route) { HandFinderView() }
                     composable(Screen.RecordGame.route) { RecordGameView() }
                 }
             }

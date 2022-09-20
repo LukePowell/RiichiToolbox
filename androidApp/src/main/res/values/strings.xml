@@ -29,4 +29,6 @@
     <string name="localized_south">S</string>
     <string name="localized_west">W</string>
     <string name="localized_north">N</string>
+    <string name="hand">Hand</string>
+    <string name="blank_mahjong_tile_desc">blank_mahjong_tile</string>
 </resources>
