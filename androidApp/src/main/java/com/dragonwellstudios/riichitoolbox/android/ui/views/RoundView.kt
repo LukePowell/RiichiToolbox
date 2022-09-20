@@ -19,6 +19,7 @@
 package com.dragonwellstudios.riichitoolbox.android.ui.views
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,10 +39,10 @@ fun RoundView(roundData: RoundData, modifier: Modifier = Modifier) {
         Row {
             Text(
                 stringResource(id = WindDisplay.Kanji.getStringRes(roundData.wind)),
-                fontSize = 32.sp
+                style = MaterialTheme.typography.h2
             )
             Spacer(modifier = Modifier.padding(4.dp))
-            Text(roundData.round.toString(), fontSize = 32.sp)
+            Text(roundData.round.toString(), style = MaterialTheme.typography.h2)
         }
         Row {
             Text("H: ${roundData.honba}")

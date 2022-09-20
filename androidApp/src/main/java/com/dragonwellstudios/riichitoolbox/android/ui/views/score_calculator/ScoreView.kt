@@ -30,7 +30,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dragonwellstudios.riichitoolbox.android.ui.theme.Riichi_ToolboxTheme
+import com.dragonwellstudios.riichitoolbox.android.ui.views.data.PreviewGame
+import com.dragonwellstudios.riichitoolbox.android.ui.views.recordgame.TsumoPayoutDialog
+import com.dragonwellstudios.riichitoolbox.logic.Game
 import com.dragonwellstudios.riichitoolbox.logic.HandResult
+import com.dragonwellstudios.riichitoolbox.logic.InitialSettings
+import com.dragonwellstudios.riichitoolbox.logic.Wind
+import com.dragonwellstudios.riichitoolbox.logic.gamestate.Player
 
 @Composable
 fun ScoreCalculatorView(scoreViewModel: ScoreViewModel = viewModel()) {
@@ -48,34 +54,12 @@ fun ScoreCalculatorView(scoreViewModel: ScoreViewModel = viewModel()) {
     }
 
     Column {
-        OutlinedTextField(
-            value = hanText,
-            onValueChange = {
-                hanText = it
-                if (hanText.isNotEmpty()) {
-                    scoreViewModel.onHanChanged(hanText.toInt())
-                }
-            },
-            label = { Text("Han") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true
-        )
-        OutlinedTextField(
-            value = fuText,
-            onValueChange = {
-                fuText = it
-                if (fuText.isNotEmpty()) {
-                    scoreViewModel.onFuChanged(fuText.toInt())
-                }
-            },
-            label = { Text("Fu") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true
-        )
+        HanSelector(han, onHanChanged = {
+            scoreViewModel.onHanChanged(it)
+        })
+        FuSelector(fu, han, onFuChanged = {
+            scoreViewModel.onFuChanged(it)
+        })
         Row {
             Text(text = "Kiriage Mangan")
             Switch(

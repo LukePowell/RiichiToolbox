@@ -18,32 +18,27 @@
 
 package com.dragonwellstudios.riichitoolbox.logic
 
-class Player(val name: String, val startingWind: Wind, var points: Int)
+import com.dragonwellstudios.riichitoolbox.logic.gamestate.Player
 
-data class GameSettings(val east: String, val south: String, val west: String, val north: String, val startingPoints: Int = 25_000, val targetPoints: Int = 30_000) {
+data class InitialSettings(val east: Player, val south: Player, val west: Player, val north: Player?, val startingPoints: Int = 25_000, val targetPoints: Int = 30_000) {
     fun name(wind: Wind): String = when(wind) {
-        Wind.EAST -> east
-        Wind.SOUTH -> south
-        Wind.WEST -> west
-        Wind.NORTH -> north
+        Wind.EAST -> east.name
+        Wind.SOUTH -> south.name
+        Wind.WEST -> west.name
+        Wind.NORTH -> north?.name ?: ""
     }
 }
 
-class Game(val startingPoints: Int = 25_000, val targetPoints: Int = 30_000) {
-    val wind = Wind.EAST
-    val riichi = 0
-    val honba = 0
-    val hand = 1
+enum class RoundEnd {
+    RON,
+    TSUMO,
+    RYUUKYOKU
+}
 
-    fun ron() {
+class Game(private val initialSettings: InitialSettings) {
+    val roundWind: Wind = Wind.EAST
+    val round: Int = 0
 
-    }
-
-    fun tsumo() {
-
-    }
-
-    fun ryuukyoku() {
-
-    }
+    val players get() = listOfNotNull(initialSettings.east, initialSettings.west, initialSettings.south, initialSettings.north)
+    val dealer get() = players[round]
 }

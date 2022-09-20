@@ -30,5 +30,8 @@
     <string name="localized_west">W</string>
     <string name="localized_north">N</string>
     <string name="hand">Hand</string>
+    <string name="tsumo">Tsumo</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
     <string name="blank_mahjong_tile_desc">blank_mahjong_tile</string>
 </resources>

@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dragonwellstudios.riichitoolbox.android.ui.views
+package com.dragonwellstudios.riichitoolbox.android.ui.views.recordgame
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Checkbox
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dragonwellstudios.riichitoolbox.android.ui.views.data.WindDisplay
 import com.dragonwellstudios.riichitoolbox.logic.Wind
+import java.text.NumberFormat
 
 data class PlayerData(
     val wind: Wind,
@@ -43,17 +44,29 @@ data class PlayerData(
 fun PlayerView(playerData: PlayerData, modifier: Modifier = Modifier) {
     val windDisplay = if (playerData.localized) WindDisplay.Localized else WindDisplay.Kanji
 
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier.padding(16.dp)) {
-        Text(stringResource(id = windDisplay.getStringRes(playerData.wind)))
-        Spacer(modifier = Modifier.padding(4.dp))
-        Column {
-            Text(text = playerData.playerName)
-            Text(text = playerData.points.toString())
+    Column(modifier = modifier) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                stringResource(id = windDisplay.getStringRes(playerData.wind)),
+                modifier = Modifier.padding(8.dp),
+                style = MaterialTheme.typography.h6
+            )
+
+            Column {
+                Text(text = playerData.playerName)
+                Text(text = NumberFormat.getInstance().format(playerData.points))
+            }
+        }
+
+        Row(horizontalArrangement = Arrangement.SpaceBetween){
+            Text("Riichi");
+            Switch(checked = false, onCheckedChange = {})
         }
     }
+
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PlayerViewPreview() {
     PlayerView(PlayerData(Wind.EAST, "East"))
